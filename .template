@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+#
+##############################################################################
+### NZBGET POST-PROCESSING SCRIPT                                          ###
+
+# PP-script template
+#
+# NOTE: This script requires Python to be installed on your system.
+
+##############################################################################
+### OPTIONS                                                                ###
+
+# testOption
+#
+# This is a test option
+#testOption=yes
+
+### NZBGET POST-PROCESSING SCRIPT                                          ###
+##############################################################################
+import os
+import sys
+
+# NZBGet Exit Codes
+NZBGET_POSTPROCESS_PARCHECK = 92
+NZBGET_POSTPROCESS_SUCCESS = 93
+NZBGET_POSTPROCESS_ERROR = 94
+NZBGET_POSTPROCESS_NONE = 95
+
+SampleIDs = os.environ['NZBPO_TESTOPTION'].split(',')
+
+sys.exit(NZBGET_POSTPROCESS_SUCCESS)
