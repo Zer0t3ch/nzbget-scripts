@@ -22,13 +22,18 @@ owner=
 ### NZBGET POST-PROCESSING SCRIPT                                            ###
 ################################################################################
 
-# recursively set perms files
-find "$NZBPP_DIRECTORY" -type f -exec chmod $NZBPO_MODE {} ';'
+set -e
+function setperms {
+    # recursively set perms files
+    find "$NZBPP_DIRECTORY" -type f -exec chmod $NZBPO_MODE {} ';'
 
-# recursively set perms dirs
-find "$NZBPP_DIRECTORY" -type d -exec chmod $NZBPO_DIRMODE {} ';'
+    # recursively set perms dirs
+    find "$NZBPP_DIRECTORY" -type d -exec chmod $NZBPO_DIRMODE {} ';'
 
-[[ "$NZBPO_OWNER" != "" ]] && chown -R "$NZBPO_OWNER" "$NZBPP_DIRECTORY"
+    # recursively set ownership
+    [[ "$NZBPO_OWNER" != "" ]] && chown -R "$NZBPO_OWNER" "$NZBPP_DIRECTORY"
+}
 
-# 93 is code for success
-exit 93
+# Run the function and exit with success code if successful
+setperms && exit 93
+exit 94
