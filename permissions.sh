@@ -34,6 +34,9 @@ function setperms {
     [[ "$NZBPO_OWNER" != "" ]] && chown -R "$NZBPO_OWNER" "$NZBPP_DIRECTORY"
 }
 
+# Exit with status NONE if the download failed (and there's nothing to do)
+[[ "${NZBPP_STATUS}" == "FAILURE"* ]] && exit 95
+
 # Run the function and exit with success code if successful
 setperms && exit 93
 exit 94
